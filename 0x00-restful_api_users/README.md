@@ -1,5 +1,7 @@
 # 0x00. RESTful API - Users
 
+This  project is first part of the RESTful API project: User model with storage in MySQL.
+
 ### Web Stack programming ― Back-end
 
 Usefull Links:
