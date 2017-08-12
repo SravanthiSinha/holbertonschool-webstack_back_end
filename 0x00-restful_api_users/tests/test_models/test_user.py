@@ -38,9 +38,17 @@ class TestUser(unittest.TestCase):
         self.user.last_name = "sinha"
         self.assertIsNotNone(self.user.last_name)
 
+    def test_nones(self):
+        """
+        Test if id, created_at, updated_at has a value.
+        """
+        self.assertIsNotNone(self.user.id)
+        self.assertIsNotNone(self.user.created_at)
+        self.assertIsNotNone(self.user.updated_at)
+
     def test_attributes(self):
         """
-        method to test if User has attributes email, first_name, last_name
+        Test if User has attributes email, first_name, last_name
         """
         self.assertTrue(hasattr(self.user, "first_name"))
         self.assertTrue(hasattr(self.user, "last_name"))
@@ -48,7 +56,7 @@ class TestUser(unittest.TestCase):
 
     def test_display_name(self):
         """
-        method to check if display_name works properly
+        Test if display_name works properly
         """
         self.assertEqual(self.user.display_name(), "")
         self.user.email = "rose@gmail.com"
@@ -60,6 +68,13 @@ class TestUser(unittest.TestCase):
         self.user.last_name = "sinha"
         self.assertEqual(self.user.display_name(), "rose sinha")
         self.assertNotEqual(self.user.display_name(), "rose")
+
+    def test__str__(self):
+        """
+        Test __str__ method
+        """
+        self.user.email = "hbtn@holbertonschool.com"
+        self.assertNotEqual(self.user, "")
 
     def tearDown(self):
         """
