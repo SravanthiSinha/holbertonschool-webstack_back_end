@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import hashlib
 from models.base_model import BaseModel
 """
 This is the user module.
@@ -13,12 +14,29 @@ class User(BaseModel):
     last_name = None
     _password = None
 
+    @property
+    def password(self):
+        """Retrieve _password"""
+        return self._password
+
+    @password.setter
+    def password(self, value):
+        """Takes a string, and encrypts it with the MD5 algorithm.
+        and assigns this new value, lowercase, to _password
+
+        :param value: the value to be used for password
+
+        """
+        if value is None or not isinstance(value, str):
+            self._password = None
+        else:
+            self._password = hashlib.md5(value.encode()).hexdigest().lower()
+
     def display_name(self):
         """Displays the full name of an User instance
 
 
-        :returns:
-        * If email, first_name and last_name are equal to None
+        :returns: If email, first_name and last_name are equal to None
         * If first_name and last_name are equal to None, return the email
         * If last_name is equal to None, return the first_name
         * If first_name is equal to None, return the last_name
@@ -36,5 +54,5 @@ class User(BaseModel):
 
     def __str__(self):
         """override to return [User] {id} - {email} - {display_name()}"""
-        op = "[User] %s - %s - %s" % (self.id, self.email, self.display_name())
-        return op
+        return "[{}] {} - {} - {}".format(self.__class__.__name__, self.id,
+                                          self.email, self.display_name())
