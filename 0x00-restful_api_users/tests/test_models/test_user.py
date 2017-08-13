@@ -39,7 +39,10 @@ class TestUser(unittest.TestCase):
 
     def test_attributes(self):
         """Test if User has attributes id, created_at, updated_at,
-        email, first_name, last_name, password """
+        email, first_name, last_name, password
+
+
+        """
         self.assertTrue(hasattr(self.user, "id"))
         self.assertTrue(hasattr(self.user, "created_at"))
         self.assertTrue(hasattr(self.user, "updated_at"))

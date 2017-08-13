@@ -31,3 +31,42 @@ class BaseModel:
         from models import db_session
         query = db_session.query(cls).order_by(cls.created_at).all()
         return(query)
+
+    @classmethod
+    def count(cls):
+        """Returns allthe number instances of cls objects in the database"""
+        from models import db_session
+        query = db_session.query(cls).count()
+        return(query)
+
+    @classmethod
+    def get(cls, id):
+        """Returns an instance of cls with a specific id.
+           Returns None if the id passed is None or not a string
+
+        :param id: id to be retrieved
+
+        """
+        from models import db_session
+
+        if id is None or not isinstance(id, str):
+            return (None)
+
+        query = db_session.query(cls).get(id)
+        return (query)
+
+    @classmethod
+    def first(cls):
+        """Returns the first instance of cls from database"""
+        from models import db_session
+
+        query = db_session.query(cls).order_by(cls.created_at).first()
+        return(query)
+
+    @classmethod
+    def last(cls):
+        """Returns the last instance of cls from database"""
+        from models import db_session
+
+        query = db_session.query(cls).order_by(desc(cls.created_at)).first()
+        return(query)

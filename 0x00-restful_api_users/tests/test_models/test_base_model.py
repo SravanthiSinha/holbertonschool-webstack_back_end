@@ -26,7 +26,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_attributes(self):
         """method to test if basemodel has attributes id, created_at,
-        updated_at"""
+        updated_at
+
+
+        """
         self.assertTrue(hasattr(self.base_model, "created_at"))
         self.assertTrue(hasattr(self.base_model, "updated_at"))
         self.assertTrue(hasattr(self.base_model, "id"))
