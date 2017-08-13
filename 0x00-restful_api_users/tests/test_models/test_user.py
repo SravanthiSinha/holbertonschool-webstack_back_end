@@ -95,6 +95,8 @@ class TestUser(unittest.TestCase):
         self.assertFalse(self.user.is_valid_password(89))
         self.assertFalse(self.user.is_valid_password("tutu1234"))
         self.assertTrue(self.user.is_valid_password("toto1234"))
+        self._password = None
+        self.assertFalse(self._password)
 
     def test_to_dict(self):
         """Test validity of a password"""
