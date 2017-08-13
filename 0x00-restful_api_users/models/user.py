@@ -34,6 +34,7 @@ class User(BaseModel, Base):
         and assigns this new value, lowercase, to _password
 
         :param password: the password to be set
+
         """
         if password is None or not isinstance(password, str):
             self._password = None

@@ -24,3 +24,10 @@ class BaseModel:
         self.id = str(uuid4())
         self.created_at = datetime.utcnow()
         self.updated_at = datetime.utcnow()
+
+    @classmethod
+    def all(cls):
+        """Returns all instances of the cls from the database"""
+        from models import db_session
+        query = db_session.query(cls).order_by(cls.created_at).all()
+        return(query)
