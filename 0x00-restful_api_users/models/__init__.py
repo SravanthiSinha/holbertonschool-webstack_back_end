@@ -11,7 +11,7 @@ db = os.environ.get('HBNB_YELP_MYSQL_DB')
 env = os.environ.get('HBNB_YELP_ENV')
 
 db_url = "mysql+mysqldb://{}:{}@{}/{}".format(user, password, host, db)
-db_engine = create_engine(db_url, echo=True)
+db_engine = create_engine(db_url)
 
 if env == "test":
     db_engine.drop_all()
