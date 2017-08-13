@@ -14,7 +14,7 @@ Base = declarative_base()
 
 class BaseModel:
     """This is a BaseModel class"""
-    id = Column(String(60), nullable=False, primary_key=True)
+    id = Column(String(60), nullable=False, primary_key=True, unique=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow(),
                         onupdate=datetime.utcnow())

@@ -16,7 +16,7 @@ class User(BaseModel, Base):
     email = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
-    _password = Column("password", String(128), nullable=True)
+    _password = Column("password", String(128), nullable=False)
 
     def __str__(self):
         """override to return [User] {id} - {email} - {display_name()}"""
