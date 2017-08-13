@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import unittest
+from datetime import datetime
 from models.user import User
 """
 This is the test_user to test user module.
@@ -38,7 +39,7 @@ class TestUser(unittest.TestCase):
 
     def test_attributes(self):
         """Test if User has attributes id, created_at, updated_at,
-        email, first_name, last_name, password"""
+        email, first_name, last_name, password """
         self.assertTrue(hasattr(self.user, "id"))
         self.assertTrue(hasattr(self.user, "created_at"))
         self.assertTrue(hasattr(self.user, "updated_at"))
@@ -48,9 +49,7 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(self.user, "_password"))
 
     def test_unique_id(self):
-        """
-        Test if ids are unique.
-        """
+        """Test if ids are unique."""
         user2 = User()
         self.assertNotEqual(self.user.id, user2.id)
 
@@ -92,6 +91,31 @@ class TestUser(unittest.TestCase):
         self.assertFalse(self.user.is_valid_password(89))
         self.assertFalse(self.user.is_valid_password("tutu1234"))
         # self.assertTrue(self.user.is_valid_password("toto1234"))
+
+    def test_to_dict(self):
+        """Test validity of a password"""
+        self.user.email = "hbtn@holbertonschool.com"
+        self.user.password = "toto1234"
+        self.user.first_name = "Bob"
+        self.user.last_name = "Dylan"
+        d_user = self.user.to_dict()
+        dict_user = {
+            "id": str(self.user.id),
+            "email": str(self.user.email),
+            "first_name": str(self.user.first_name),
+            "last_name": str(self.user.last_name),
+            "created_at": str(datetime.strftime(
+                self.user.created_at, "%Y-%m-%d %H:%M:%S"
+            )
+            ),
+            "updated_at": str(datetime.strftime(
+                self.user.updated_at, "%Y-%m-%d %H:%M:%S"
+            )
+            )
+        }
+        self.assertIsNotNone(d_user)
+        self.assertEqual(d_user, d_user)
+        self.assertDictEqual(d_user, d_user)
 
     def tearDown(self):
         """dispose the object user"""

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import hashlib
+from datetime import datetime
 from models.base_model import BaseModel
 """
 This is the user module.
@@ -58,9 +59,9 @@ class User(BaseModel):
         return "%s %s" % (self.first_name, self.last_name)
 
     def is_valid_password(self, pwd):
-        """
-        validates that the value passed is the clear version of the password
+        """validates that the value passed is the clear version of the password
         of a User instance
+
         :param pwd: pwd to be checked with
 
         """
@@ -74,3 +75,21 @@ class User(BaseModel):
         if self._password == hashlib.md5(pwd.encode()).hexdigest().lower():
             return True
         return False
+
+    def to_dict(self):
+        """serialize User"""
+        user_to_dict = {
+            "id": str(self.id),
+            "email": str(self.email),
+            "first_name": str(self.first_name),
+            "last_name": str(self.last_name),
+            "created_at": str(datetime.strftime(
+                self.created_at, "%Y-%m-%d %H:%M:%S"
+            )
+            ),
+            "updated_at": str(datetime.strftime(
+                self.updated_at, "%Y-%m-%d %H:%M:%S"
+            )
+            )
+        }
+        return user_to_dict
