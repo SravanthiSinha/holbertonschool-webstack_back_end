@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import unittest
 from models.base_model import BaseModel
+from datetime import datetime
 """
 This is the test_base_model to test base_model module.
 This is a TestBaseModel class inside the test_base_model module.
@@ -27,12 +28,18 @@ class TestBaseModel(unittest.TestCase):
     def test_attributes(self):
         """method to test if basemodel has attributes id, created_at,
         updated_at
-
-
         """
         self.assertTrue(hasattr(self.base_model, "created_at"))
         self.assertTrue(hasattr(self.base_model, "updated_at"))
         self.assertTrue(hasattr(self.base_model, "id"))
+
+    def test_types(self):
+        """method to test if basemodel has attributes id, created_at,
+        updated_at
+        """
+        self.assertIsInstance(self.base_model.id, str)
+        self.assertIsInstance(self.base_model.created_at, datetime)
+        self.assertIsInstance(self.base_model.updated_at, datetime)
 
     def test_unique_id(self):
         """Test if ids are unique."""
