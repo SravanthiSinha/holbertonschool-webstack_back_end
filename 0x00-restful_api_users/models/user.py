@@ -61,6 +61,8 @@ class User(BaseModel, Base):
             return self.email
         if(self.last_name is None):
             return self.first_name
+        if(self.first_name is None):
+            return self.last_name
         return "%s %s" % (self.first_name, self.last_name)
 
     def is_valid_password(self, pwd):
