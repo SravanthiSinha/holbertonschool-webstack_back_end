@@ -105,6 +105,12 @@ class TestUser(unittest.TestCase):
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
         d_user = self.user.to_dict()
+        self.assertIsInstance(d_user["id"], str)
+        self.assertIsInstance(d_user["email"], str)
+        self.assertIsInstance(d_user["first_name"], str)
+        self.assertIsInstance(d_user["last_name"], str)
+        self.assertIsInstance(d_user["created_at"], str)
+        self.assertIsInstance(d_user["updated_at"], str)
         dict_user = {
             "id": str(self.user.id),
             "email": str(self.user.email),
