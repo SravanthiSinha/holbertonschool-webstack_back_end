@@ -126,8 +126,12 @@ class TestUser(unittest.TestCase):
             )
         }
         self.assertIsNotNone(d_user)
-        self.assertEqual(d_user, d_user)
+        self.assertEqual(d_user, dict_user)
         self.assertDictEqual(d_user, d_user)
+        for user_attribute in d_user.keys():
+            self.assertEqual(
+                type(d_user[user_attribute]), type(dict_user[user_attribute]))
+            self.assertEqual(d_user[user_attribute], dict_user[user_attribute])
 
     def tearDown(self):
         """dispose the object user"""
