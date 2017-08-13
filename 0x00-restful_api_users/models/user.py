@@ -39,7 +39,9 @@ class User(BaseModel, Base):
         if password is None or not isinstance(password, str):
             self._password = None
         else:
-            self._password = hashlib.md5(password.encode()).hexdigest().lower()
+            m = hashlib.md5()
+            m.update(password.encode('utf-8'))
+            self._password = m.hexdigest().lower()
 
     def display_name(self):
         """Displays the full name of an User instance
