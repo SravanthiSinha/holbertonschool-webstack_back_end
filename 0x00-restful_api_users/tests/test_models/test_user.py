@@ -47,6 +47,13 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(self.user, "email"))
         self.assertTrue(hasattr(self.user, "_password"))
 
+    def test_unique_id(self):
+        """
+        Test if ids are unique.
+        """
+        user2 = User()
+        self.assertNotEqual(self.user.id, user2.id)
+
     def test_display_name(self):
         """Test if display_name works properly"""
         self.assertEqual(self.user.display_name(), "")
@@ -71,11 +78,20 @@ class TestUser(unittest.TestCase):
 
     def test_password(self):
         """Test password"""
-        self.user.password = "hello"
+        user = User()
+        user.password = "hello"
         md5_password = "5d41402abc4b2a76b9719d911017c592"
-        self.assertIsNotNone(self.user.password)
-        # self.assertNotEqual(self.user.password, "hello")
+        self.assertIsNotNone(user.password)
+        # self.assertNotEqual(user.password, "hello")
         # self.assertEqual(self.user.password, md5_password)
+
+    def test_is_valid_password(self):
+        """Test validity of a password"""
+        self.user.password = "toto1234"
+        self.assertFalse(self.user.is_valid_password(None))
+        self.assertFalse(self.user.is_valid_password(89))
+        self.assertFalse(self.user.is_valid_password("tutu1234"))
+        # self.assertTrue(self.user.is_valid_password("toto1234"))
 
     def tearDown(self):
         """dispose the object user"""

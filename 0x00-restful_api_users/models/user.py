@@ -14,6 +14,11 @@ class User(BaseModel):
     last_name = None
     _password = None
 
+    def __str__(self):
+        """override to return [User] {id} - {email} - {display_name()}"""
+        return "[{}] {} - {} - {}".format(self.__class__.__name__, self.id,
+                                          self.email, self.display_name())
+
     @property
     def password(self):
         """Retrieve _password"""
@@ -52,7 +57,20 @@ class User(BaseModel):
             return self.first_name
         return "%s %s" % (self.first_name, self.last_name)
 
-    def __str__(self):
-        """override to return [User] {id} - {email} - {display_name()}"""
-        return "[{}] {} - {} - {}".format(self.__class__.__name__, self.id,
-                                          self.email, self.display_name())
+    def is_valid_password(self, pwd):
+        """
+        validates that the value passed is the clear version of the password
+        of a User instance
+        :param pwd: pwd to be checked with
+
+        """
+        if pwd is None:
+            return False
+        if not isinstance(pwd, str):
+            return False
+        if self._password is None:
+            return False
+        print(self._password)
+        if self._password == hashlib.md5(pwd.encode()).hexdigest().lower():
+            return True
+        return False
