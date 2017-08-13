@@ -95,8 +95,8 @@ class TestUser(unittest.TestCase):
         self.assertFalse(self.user.is_valid_password(89))
         self.assertFalse(self.user.is_valid_password("tutu1234"))
         self.assertTrue(self.user.is_valid_password("toto1234"))
-        self._password = None
-        self.assertFalse(self._password)
+        self.user._password = None
+        self.assertFalse(self.user.is_valid_password("toto1234"))
 
     def test_to_dict(self):
         """Test validity of a password"""
@@ -105,12 +105,6 @@ class TestUser(unittest.TestCase):
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
         d_user = self.user.to_dict()
-        self.assertIsInstance(d_user["id"], str)
-        self.assertIsInstance(d_user["email"], str)
-        self.assertIsInstance(d_user["first_name"], str)
-        self.assertIsInstance(d_user["last_name"], str)
-        self.assertIsInstance(d_user["created_at"], str)
-        self.assertIsInstance(d_user["updated_at"], str)
         dict_user = {
             "id": str(self.user.id),
             "email": str(self.user.email),
