@@ -67,6 +67,8 @@ class TestUser(unittest.TestCase):
         self.user.last_name = "sinha"
         self.assertEqual(self.user.display_name(), "rose sinha")
         self.assertNotEqual(self.user.display_name(), "rose")
+        self.user.first_name = None
+        self.assertEqual(self.user.display_name(), "sinha")
 
     def test__str__(self):
         """Test __str__ method"""
