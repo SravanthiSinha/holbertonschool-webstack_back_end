@@ -13,7 +13,7 @@ This is a User class inside the user module (inherits BaseModel and Base).
 class User(BaseModel, Base):
     """This is a User class"""
     __tablename__ = "users"
-    email = Column(String(128), nullable=False)    
+    email = Column(String(128), nullable=False)
     _password = Column("password", String(128), nullable=False)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
@@ -45,7 +45,6 @@ class User(BaseModel, Base):
 
     def display_name(self):
         """Displays the full name of an User instance
-
 
         :returns: If email, first_name and last_name are equal to None
         * If first_name and last_name are equal to None, return the email
