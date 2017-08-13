@@ -1,19 +1,22 @@
 #!/usr/bin/python3
 import hashlib
 from datetime import datetime
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, String, DateTime
+
 """
 This is the user module.
-This is a User class inside the user module (inherits BaseModel).
+This is a User class inside the user module (inherits BaseModel and Base).
 """
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This is a User class"""
-    email = None
-    first_name = None
-    last_name = None
-    _password = None
+    __tablename__ = "users"
+    email = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
+    _password = Column(String(128), nullable=True)
 
     def __str__(self):
         """override to return [User] {id} - {email} - {display_name()}"""
@@ -26,17 +29,16 @@ class User(BaseModel):
         return self._password
 
     @password.setter
-    def password(self, value):
+    def password(self, password):
         """Takes a string, and encrypts it with the MD5 algorithm.
         and assigns this new value, lowercase, to _password
 
-        :param value: the value to be used for password
-
+        :param password: the password to be set
         """
-        if value is None or not isinstance(value, str):
+        if password is None or not isinstance(password, str):
             self._password = None
         else:
-            self._password = hashlib.md5(value.encode()).hexdigest().lower()
+            self._password = hashlib.md5(password.encode()).hexdigest().lower()
 
     def display_name(self):
         """Displays the full name of an User instance
@@ -71,7 +73,6 @@ class User(BaseModel):
             return False
         if self._password is None:
             return False
-        print(self._password)
         if self._password == hashlib.md5(pwd.encode()).hexdigest().lower():
             return True
         return False

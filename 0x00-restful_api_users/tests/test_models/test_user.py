@@ -46,7 +46,6 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(self.user, "first_name"))
         self.assertTrue(hasattr(self.user, "last_name"))
         self.assertTrue(hasattr(self.user, "email"))
-        self.assertTrue(hasattr(self.user, "_password"))
 
     def test_unique_id(self):
         """Test if ids are unique."""
@@ -81,8 +80,8 @@ class TestUser(unittest.TestCase):
         user.password = "hello"
         md5_password = "5d41402abc4b2a76b9719d911017c592"
         self.assertIsNotNone(user.password)
-        # self.assertNotEqual(user.password, "hello")
-        # self.assertEqual(self.user.password, md5_password)
+        self.assertNotEqual(user.password, "hello")
+        self.assertEqual(user.password, md5_password)
 
     def test_is_valid_password(self):
         """Test validity of a password"""
@@ -90,7 +89,7 @@ class TestUser(unittest.TestCase):
         self.assertFalse(self.user.is_valid_password(None))
         self.assertFalse(self.user.is_valid_password(89))
         self.assertFalse(self.user.is_valid_password("tutu1234"))
-        # self.assertTrue(self.user.is_valid_password("toto1234"))
+        self.assertTrue(self.user.is_valid_password("toto1234"))
 
     def test_to_dict(self):
         """Test validity of a password"""
