@@ -16,7 +16,7 @@ db_url = "mysql+mysqldb://{}:{}@{}/{}".format(user, password, host, db)
 db_engine = create_engine(db_url)
 
 if env == "test":
-    db_engine.drop_all()
+    Base.metadata.drop_all(db_engine)
 
 Base.metadata.create_all(db_engine)
 
