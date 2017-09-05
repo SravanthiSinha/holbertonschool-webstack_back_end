@@ -11,6 +11,6 @@ app.register_blueprint(app_views)
 
 if __name__ == '__main__':
     if(env_port is not None and env_host is not None):
-        app.run(host=env_host, port=int(env_port), debug=True)
+        app.run(host=env_host, port=int(env_port))
     else:
-        app.run(debug=True)
+        app.run()
