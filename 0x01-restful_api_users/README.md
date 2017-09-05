@@ -30,9 +30,14 @@ api/v1/views/index.py -
 ```
   Return the JSON: { "status": "OK" }
 ```
+* route : GET /api/v1/stats
+```
+ Return the JSON: { "users": <number of User instance in your database> }
+```
 
 api/v1/app.py - Starts the Flask app
-
+* Handles for 404 error
+* implemented teardown_appcontext of app for closing the database connexion when the request is done
 
 ### Useful resources:
 * [Rest API concept](https://intranet.hbtn.io/concepts/45)
