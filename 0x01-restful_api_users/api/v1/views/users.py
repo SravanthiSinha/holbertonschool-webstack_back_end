@@ -63,8 +63,30 @@ def create_user():
         try:
             db_session.add(newUser)
             db_session.commit()
-        except:
+        except BaseException:
             return jsonify(error="Can't create User: <exception message>"), 400
         return jsonify(User.last().to_dict()), 201
+    else:
+        return jsonify(error="Wrong format"), 400
+
+
+@app_views.route('/users/<user_id>', strict_slashes=False, methods=['PUT'])
+def update_user(user_id):
+    """route /users/<user_id> returns - updated user
+
+    :param user_id: user id of user to be deleted
+
+    """
+    user = User.get(user_id)
+    if user is None:
+        return abort(404)
+    if request.get_json():
+        json = request.get_json()
+        if json.get('first_name'):
+            user.first_name = json['first_name']
+        if json.get('last_name'):
+            user.last_name = json['last_name']
+        db_session.commit()
+        return jsonify(user.to_dict())
     else:
         return jsonify(error="Wrong format"), 400

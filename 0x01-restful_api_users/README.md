@@ -61,6 +61,11 @@ Return the JSON: User with the user_id is deleted
 Return the JSON: new User created
 ```
 
+* route PUT /api/v1/users/<user_id>
+```
+Return the JSON: new User updated
+```
+
 ### Useful resources:
 * [Rest API concept](https://intranet.hbtn.io/concepts/45)
 * [Learn REST: A RESTful Tutorial](http://www.restapitutorial.com/)
