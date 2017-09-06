@@ -23,6 +23,10 @@ Representation of the dictionary: tips:
 "Sysadmin" = "is hiring"
 ```
 
+api/v1/app.py - Starts the Flask app
+* Handles for 404 error
+* implemented teardown_appcontext of app for closing the database connexion when the request is done
+
 api/v1/views/\__init__.py - Creates an instance of Blueprint called app_views
 
 api/v1/views/index.py -
@@ -30,14 +34,23 @@ api/v1/views/index.py -
 ```
   Return the JSON: { "status": "OK" }
 ```
+
 * route : GET /api/v1/stats
 ```
  Return the JSON: { "users": <number of User instance in your database> }
+ ```
+
+api/v1/views/users.py  -
+* route: GET /api/v1/users
+```
+Return the JSON: List of User
 ```
 
-api/v1/app.py - Starts the Flask app
-* Handles for 404 error
-* implemented teardown_appcontext of app for closing the database connexion when the request is done
+* route GET /api/v1/users/<user_id>
+```
+Return the JSON: User with the user_id
+```
+
 
 ### Useful resources:
 * [Rest API concept](https://intranet.hbtn.io/concepts/45)
