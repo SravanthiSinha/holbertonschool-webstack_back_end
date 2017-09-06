@@ -26,3 +26,17 @@ def get_user(user_id):
         return abort(404)
     else:
         return jsonify(user.to_dict())
+
+
+@app_views.route('/users/<user_id>', strict_slashes=False, methods=['DELETE'])
+def delete_user(user_id):
+    """route /api/v1/status returns - {}
+
+    :param user_id: user id of user to be deleted
+
+    """
+    user = User.get(user_id)
+    if user is None:
+        return abort(404)
+    else:
+        return jsonify()

@@ -51,6 +51,10 @@ Return the JSON: List of User
 Return the JSON: User with the user_id
 ```
 
+* route DELETE /api/v1/users/<user_id>
+```
+Return the JSON: User with the user_id is deleted
+```
 
 ### Useful resources:
 * [Rest API concept](https://intranet.hbtn.io/concepts/45)
