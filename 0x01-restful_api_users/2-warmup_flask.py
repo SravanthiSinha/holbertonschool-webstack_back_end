@@ -1,9 +1,10 @@
 #!/usr/bin/python3
+"""A script that start a Flask application"""
 from flask import Flask
 from os import getenv
 
-app = Flask(__name__)
 
+app = Flask(__name__)
 env_port = getenv('HBNB_API_PORT')
 env_host = getenv('HBNB_API_HOST')
 
