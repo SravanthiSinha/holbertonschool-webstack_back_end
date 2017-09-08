@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+"""A script that start a Flask application and handles database and errors"""
 from flask import Flask
 from flask import jsonify
 from os import getenv

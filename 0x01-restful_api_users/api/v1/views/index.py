@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""index view with /status and /stats as routes """
 from flask import Flask
 from flask import jsonify
 from api.v1.views import app_views

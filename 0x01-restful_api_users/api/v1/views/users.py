@@ -1,4 +1,12 @@
 #!/usr/bin/python3
+"""
+users view with routes
+ GET /users -  list of users
+ GET /users/<user_id> - fetches user with user_id
+ DELETE /users/<user_id> - fetches {}
+ POST /users - creates a user
+ PUT /users/<user_id> - update a user with user_id
+"""
 from flask import Flask, abort, request
 from flask import jsonify
 from api.v1.views import app_views
@@ -44,7 +52,7 @@ def delete_user(user_id):
 
 @app_views.route('/users', strict_slashes=False, methods=['POST'])
 def create_user():
-    """route /users/<user_id> returns - created user"""
+    """route /users returns - created user"""
     if request.get_json():
         json = request.get_json()
         email = json.get('email')
