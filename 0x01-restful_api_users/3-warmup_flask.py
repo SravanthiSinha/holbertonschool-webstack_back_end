@@ -13,7 +13,7 @@ env_host = getenv('HBNB_API_HOST')
 @app.route('/hbtn', strict_slashes=False, methods=['GET'])
 def hbtn():
     """route /hbtn returns - json data"""
-    return jsonify(C="is fun", Python="is cool", sysadmin="is hiring")
+    return jsonify(C="is fun", Python="is cool", Sysadmin="is hiring")
 
 
 if __name__ == '__main__':
