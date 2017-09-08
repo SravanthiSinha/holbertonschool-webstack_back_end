@@ -47,6 +47,8 @@ def delete_user(user_id):
     if user is None:
         return abort(404)
     else:
+        db_session.delete(user)
+        db_session.commit()
         return jsonify()
 
 
