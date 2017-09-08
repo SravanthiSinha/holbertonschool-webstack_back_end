@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Creates an instance of Blueprint called app_views and imports all the views"""
+"""Creates an instance of Blueprint called app_views & imports all the views"""
 from flask import Blueprint
 
 
