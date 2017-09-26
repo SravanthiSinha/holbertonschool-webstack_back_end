@@ -23,6 +23,26 @@ def page_not_found(e):
     return jsonify(error="Not found"), 404
 
 
+@app.errorhandler(401)
+def handle_unauthorized(e):
+    """error handler for 401 error
+
+    :param e: unused
+
+    """
+    return jsonify(error="Unauthorized"), 401
+
+
+@app.errorhandler(403)
+def handle_forbidden(e):
+    """error handler for 403 error
+
+    :param e: unused
+
+    """
+    return jsonify(error="Forbidden"), 403
+
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database session at the end of the request.
