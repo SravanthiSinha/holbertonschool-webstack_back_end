@@ -1,16 +1,32 @@
 #!/usr/bin/python3
 """A script that start a Flask application and handles database and errors"""
-from flask import Flask
+from flask import Flask, abort
 from flask import jsonify
 from os import getenv
 from api.v1.views import app_views
 from models import db_session
+from api.v1.auth.auth import Auth
+from flask import request
 
 env_port = getenv('HBNB_API_PORT')
 env_host = getenv('HBNB_API_HOST')
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+
+auth = Auth()
+
+
+@app.before_request
+def before_request():
+    """checks valid request paths on every request """
+    excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/',
+                      '/api/v1/forbidden/']
+    if auth.require_auth(request.path, excluded_paths):
+        if auth.authorization_header(request) is None:
+            abort(401)
+        if auth.current_user(request) is None:
+            abort(403)
 
 
 @app.errorhandler(404)
