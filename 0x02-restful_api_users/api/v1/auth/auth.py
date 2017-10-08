@@ -31,7 +31,6 @@ class Auth():
         :param request: Flask request object (Default value = None)
 
         """
-        print(request)
         if (request is None) or ('Authorization' not in request.headers):
             return None
         return request.headers.get('Authorization')
