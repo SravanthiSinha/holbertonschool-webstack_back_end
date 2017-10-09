@@ -4,6 +4,7 @@ from flask import Flask
 from flask import request
 from api.v1.auth.auth import Auth
 import base64
+from models import db_session, User
 """
 This is the basic_auth module.
 This is a BasicAuth class inside the basic_auth module.
@@ -61,3 +62,21 @@ class BasicAuth(Auth):
             return None, None
         credentails = decoded_base64_authorization_header.split(":")
         return credentails[0], credentails[1]
+
+    def user_object_from_credentials(self, user_email, user_pwd):
+        """returns the User instance based on his email and password
+
+        :param user_email: user email id
+        :param user_pwd: user password
+
+        """
+        if user_email is None or not isinstance(user_email, str):
+            return None
+        if user_pwd is None or not isinstance(user_pwd, str):
+            return None
+        for user in db_session.query(User).filter(User.email == user_email):
+            if not user:
+                return None
+            if not user.is_valid_password(user_pwd):
+                return None
+            return user
