@@ -64,7 +64,7 @@ class BasicAuth(Auth):
         return credentails[0], credentails[1]
 
     def user_object_from_credentials(self, user_email, user_pwd):
-        """returns the User instance based on his email and password
+        """returns the User instance based on email and password
 
         :param user_email: user email id
         :param user_pwd: user password
@@ -80,3 +80,23 @@ class BasicAuth(Auth):
             if not user.is_valid_password(user_pwd):
                 return None
             return user
+
+    def current_user(self, request=None):
+        """get current user on request with basic authentication
+
+        :param request: Default value = None)
+
+        """
+        authorization_header = self.authorization_header(request)
+        base64_authorization_header = self.extract_base64_authorization_header(
+            authorization_header
+        )
+        decoded_base64 = self.decode_base64_authorization_header(
+            base64_authorization_header)
+        extracted_credentials = self.extract_user_credentials(decoded_base64)
+        user_email = extracted_credentials[0]
+        user_password = extracted_credentials[-1]
+        user = self.user_object_from_credentials(
+            user_email, user_password
+        )
+        return user
