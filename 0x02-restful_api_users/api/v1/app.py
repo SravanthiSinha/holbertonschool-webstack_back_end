@@ -11,11 +11,15 @@ from api.v1.auth.basic_auth import BasicAuth
 
 env_port = getenv('HBNB_API_PORT')
 env_host = getenv('HBNB_API_HOST')
+env_auth = getenv('HBNB_YELP_AUTH')
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
-auth = BasicAuth()
+if env_auth == 'basic_auth':
+    auth = BasicAuth()
+else:
+    auth = Auth()
 
 
 @app.before_request
