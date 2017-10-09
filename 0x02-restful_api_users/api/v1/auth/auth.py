@@ -23,7 +23,7 @@ class Auth():
         for p in excluded_paths:
             if ('*' in p):
                 index = p.find('*')
-                if (p[:index] != path[:len(p[:index])]):
+                if (p[:index] == path[:len(p[:index])]):
                     return False
             elif (p == path) or (p[::-1][0] == '/' and p[:-1] == path):
                 return False
