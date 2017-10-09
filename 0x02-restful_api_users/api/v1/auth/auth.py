@@ -3,7 +3,7 @@
 from flask import Flask
 from flask import request
 """
-This is the Auth module.
+This is the auth module.
 This is a Auth class inside the auth module.
 """
 
