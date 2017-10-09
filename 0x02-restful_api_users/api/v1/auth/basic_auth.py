@@ -60,7 +60,7 @@ class BasicAuth(Auth):
             return None, None
         if decoded_base64_authorization_header.find(":") == -1:
             return None, None
-        credentails = decoded_base64_authorization_header.split(":")
+        credentails = decoded_base64_authorization_header.split(":", 1)
         return credentails[0], credentails[1]
 
     def user_object_from_credentials(self, user_email, user_pwd):
