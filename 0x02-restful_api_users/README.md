@@ -2,6 +2,7 @@
 
 ### Web Stack programming ― Back-end
 
+Implementing a Basic Authentication to the API
 
 ### Usefull Resources:
 * [REST API Authentication Mechanisms](https://www.youtube.com/watch?v=501dpx2IjGY)
