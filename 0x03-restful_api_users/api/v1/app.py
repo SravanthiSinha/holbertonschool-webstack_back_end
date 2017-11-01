@@ -7,7 +7,6 @@ from api.v1.views import app_views
 from models import db_session
 from api.v1.auth.auth import Auth
 from flask import request
-from api.v1.auth.basic_auth import BasicAuth
 
 env_port = getenv('HBNB_API_PORT')
 env_host = getenv('HBNB_API_HOST')
@@ -17,7 +16,11 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 if env_auth == 'basic_auth':
+    from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
+elif env_auth == 'session_auth':
+    from api.v1.auth.session_auth import SessionAuth
+    auth = SessionAuth()
 else:
     auth = Auth()
 
