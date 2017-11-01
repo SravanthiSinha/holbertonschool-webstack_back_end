@@ -15,9 +15,9 @@ class SessionAuth(Auth):
     user_id_by_session_id = dict()
 
     def create_session(self, user_id=None):
-        """
+        """creates a Session ID for a user_id
 
-        :param user_id: Default value = None)
+        :param user_id: Default value = None
 
         """
         if user_id is None:
@@ -30,9 +30,9 @@ class SessionAuth(Auth):
         return session_id
 
     def user_id_for_session_id(self, session_id=None):
-        """
+        """fetches a User ID based on a Session ID
 
-        :param session_id:  (Default value = None)
+        :param session_id: Default value = None
 
         """
         if session_id is None:

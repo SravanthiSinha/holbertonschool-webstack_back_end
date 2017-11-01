@@ -2,6 +2,7 @@
 """A class to manage the API authentication"""
 from flask import Flask
 from flask import request
+from os import getenv
 """
 This is the auth module.
 This is a Auth class inside the auth module.
@@ -46,3 +47,13 @@ class Auth():
 
         """
         return None
+
+    def session_cookie(self, request=None):
+        """returns a cookie value from a request
+
+        :param request: Default value = None)
+
+        """
+        if request is None:
+            return None
+        return request.cookies.get(getenv('HBNB_YELP_SESSION_NAME'))
