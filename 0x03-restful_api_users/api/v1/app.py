@@ -27,7 +27,8 @@ else:
 
 @app.before_request
 def before_request():
-    """checks valid request paths on every request and sets the current user """
+    """checks valid request paths on every request and sets the
+    current user """
     excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/',
                       '/api/v1/forbidden/']
     if auth.require_auth(request.path, excluded_paths):
@@ -36,7 +37,8 @@ def before_request():
         request.current_user = auth.current_user(request)
         if request.current_user is None:
             abort(403)
-        
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     """error handler for 404 error
