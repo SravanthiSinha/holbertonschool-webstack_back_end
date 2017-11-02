@@ -4,6 +4,7 @@ from flask import Flask
 from flask import request
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+from models import db_session, User
 """
 This is the session_auth module.
 This is a SessionAuth class inside the session_auth module.
@@ -40,3 +41,17 @@ class SessionAuth(Auth):
         if not isinstance(session_id, str):
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """fetches current_user based on a cookie value
+
+        :param request: Default value = None)
+
+        """
+        cookie_name = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(cookie_name)
+        if user_id is not None:
+            for user in db_session.query(User).filter(User.id == user_id):
+                if not user:
+                    return None
+                return user
