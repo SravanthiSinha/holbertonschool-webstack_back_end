@@ -13,10 +13,9 @@ from os import getenv
 
 @app_views.route('/auth_session/login', strict_slashes=False, methods=['POST'])
 def login():
-    """route /auth_session/login"""
+    """login route"""
     user_email = request.form.get('email')
     user_pwd = request.form.get('password')
-    print(user_email)
     if user_email is None:
         return jsonify(error="email missing"), 400
     if user_pwd is None:
@@ -25,7 +24,7 @@ def login():
         if not user.is_valid_password(user_pwd):
             return jsonify(error="wrong password"), 401
         session_id = auth.create_session(user.id)
-        out = jsonify(state=0, msg='success')
-        out.set_cookie(getenv('HBNB_YELP_SESSION_NAME'), session_id)
-        return jsonify(user.to_dict())
+        response = jsonify(user.to_dict())
+        response.set_cookie(getenv('HBNB_YELP_SESSION_NAME'), session_id)
+        return response
     return jsonify(error="no user found for this email"), 404
