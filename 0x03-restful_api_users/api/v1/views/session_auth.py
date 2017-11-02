@@ -28,3 +28,12 @@ def login():
         response.set_cookie(getenv('HBNB_YELP_SESSION_NAME'), session_id)
         return response
     return jsonify(error="no user found for this email"), 404
+
+
+@app_views.route('/auth_session/logout', strict_slashes=False,
+                 methods=['DELETE'])
+def logout():
+    """logout route"""
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    abort(404)

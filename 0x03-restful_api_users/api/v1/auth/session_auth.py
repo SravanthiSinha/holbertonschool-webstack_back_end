@@ -4,6 +4,7 @@ from flask import Flask
 from flask import request
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+from os import getenv
 from models import db_session, User
 """
 This is the session_auth module.
@@ -55,3 +56,20 @@ class SessionAuth(Auth):
                 if not user:
                     return None
                 return user
+
+    def destroy_session(self, request=None):
+        """Deletes the user session
+
+        :param request:  (Default value = None)
+
+        """
+        if request is None:
+            return False
+        session_id = self.session_cookie(request)
+        if session_id is None:
+            return False
+        user_id = self.user_id_for_session_id(session_id)
+        if user_id is None:
+            return False
+        self.user_id_by_session_id.pop(session_id, None)
+        return True
