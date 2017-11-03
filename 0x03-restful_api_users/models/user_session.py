@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-import hashlib
-from datetime import datetime
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, String
 
 """
 This is the user_session module.

@@ -20,6 +20,8 @@ class SessionDBAuth(SessionExpAuth):
         :param user_id: Default value = None)
 
         """
+        if user_id is None:
+            return None
         session_id = super(SessionDBAuth, self).create_session(user_id)
         if session_id is None:
             return None
@@ -55,11 +57,13 @@ class SessionDBAuth(SessionExpAuth):
         :param request: Default value = None)
 
         """
-        session_id = self.session_cookie(request)
-        if session_id and super(SessionDBAuth, self).destroy_session(request):
-            for user_session in db_session.query(UserSession).filter(
-                    UserSession.session_id == session_id):
-                db_session.delete(user_session)
-                db_session.commit()
-                return True
+        if request:
+            session_id = self.session_cookie(request)
+            if session_id:
+                if super(SessionDBAuth, self).destroy_session(request):
+                    for user_session in db_session.query(UserSession).filter(
+                            UserSession.session_id == session_id):
+                        db_session.delete(user_session)
+                        db_session.commit()
+                        return True
         return False
