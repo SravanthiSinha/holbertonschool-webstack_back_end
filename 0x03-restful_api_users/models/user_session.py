@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
-
 """
 This is the user_session module.
 This is a UserSession class inside the user_session module (inherits BaseModel
 and Base).
 """
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String
 
 
 class UserSession(BaseModel, Base):

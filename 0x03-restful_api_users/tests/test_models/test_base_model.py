@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-import unittest
-from models.base_model import BaseModel
-from datetime import datetime
 """
 This is the test_base_model to test base_model module.
 This is a TestBaseModel class inside the test_base_model module.
 """
+import unittest
+from models.base_model import BaseModel
+from datetime import datetime
 
 
 class TestBaseModel(unittest.TestCase):

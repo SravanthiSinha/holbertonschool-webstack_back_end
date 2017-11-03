@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-import unittest
-from datetime import datetime
-from models.user import User
 """
 This is the test_user to test user module.
 This is a TestUser class insemaile the test_user module.
 """
+import unittest
+from datetime import datetime
+from models.user import User
 
 
 class TestUser(unittest.TestCase):

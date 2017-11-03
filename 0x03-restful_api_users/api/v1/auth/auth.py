@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-"""A class to manage the API authentication"""
-from flask import Flask
-from flask import request
-from os import getenv
 """
 This is the auth module.
 This is a Auth class inside the auth module.
 """
+from flask import Flask
+from flask import request
+from os import getenv
 
 
 class Auth():

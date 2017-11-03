@@ -1,14 +1,13 @@
 #!/usr/bin/python3
-"""A class to manage the API authentication"""
+"""
+This is the session_exp_auth module.
+This is a SessionExpAuth class inside the session_exp_auth module.
+"""
 from flask import Flask
 from flask import request
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
 from datetime import datetime, timedelta
-"""
-This is the session_exp_auth module.
-This is a SessionExpAuth class inside the session_exp_auth module.
-"""
 
 
 class SessionExpAuth(SessionAuth):

@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-"""A class to manage the API authentication through Session"""
+"""
+This is the session_auth module.
+This is a SessionAuth class inside the session_auth module.
+"""
 from flask import Flask
 from flask import request
 from api.v1.auth.auth import Auth
 from uuid import uuid4
 from os import getenv
 from models import db_session, User
-"""
-This is the session_auth module.
-This is a SessionAuth class inside the session_auth module.
-"""
 
 
 class SessionAuth(Auth):

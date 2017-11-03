@@ -1,13 +1,13 @@
 #!/usr/bin/python3
+"""
+This is the base_model module.
+This is a BaseModel class inside the base_model module.
+"""
 from uuid import uuid4
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, desc
 
-"""
-This is the base_model module.
-This is a BaseModel class inside the base_model module.
-"""
 
 Base = declarative_base()
 

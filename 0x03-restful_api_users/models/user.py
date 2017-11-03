@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-import hashlib
-from datetime import datetime
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, DateTime
-
 """
 This is the user module.
 This is a User class inside the user module (inherits BaseModel and Base).
 """
+import hashlib
+from datetime import datetime
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, String, DateTime
 
 
 class User(BaseModel, Base):

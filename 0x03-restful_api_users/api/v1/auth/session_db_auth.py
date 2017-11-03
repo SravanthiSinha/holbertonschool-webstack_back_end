@@ -1,14 +1,13 @@
 #!/usr/bin/python3
-"""A class to manage the DB for Session authentication"""
+"""
+This is the session_db_auth module.
+This is a SessionDBAuth class inside the session_db_auth module.
+"""
 from flask import Flask
 from flask import request
 from api.v1.auth.session_exp_auth import SessionExpAuth
 from models import db_session, UserSession
 from datetime import datetime, timedelta
-"""
-This is the session_db_auth module.
-This is a SessionDBAuth class inside the session_db_auth module.
-"""
 
 
 class SessionDBAuth(SessionExpAuth):

@@ -1,14 +1,13 @@
 #!/usr/bin/python3
-"""A class to manage the API authentication"""
+"""
+This is the basic_auth module.
+This is a BasicAuth class inside the basic_auth module.
+"""
 from flask import Flask
 from flask import request
 from api.v1.auth.auth import Auth
 import base64
 from models import db_session, User
-"""
-This is the basic_auth module.
-This is a BasicAuth class inside the basic_auth module.
-"""
 
 
 class BasicAuth(Auth):
