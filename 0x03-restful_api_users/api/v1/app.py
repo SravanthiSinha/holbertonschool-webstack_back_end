@@ -5,7 +5,6 @@ from flask import jsonify
 from os import getenv
 from api.v1.views import app_views
 from models import db_session
-from api.v1.auth.auth import Auth
 from flask import request
 
 env_port = getenv('HBNB_API_PORT')
@@ -24,7 +23,11 @@ elif env_auth == 'session_auth':
 elif env_auth == 'session_exp_auth':
     from api.v1.auth.session_exp_auth import SessionExpAuth
     auth = SessionExpAuth()
+elif env_auth == 'session_db_auth':
+    from api.v1.auth.session_db_auth import SessionDBAuth
+    auth = SessionDBAuth()
 else:
+    from api.v1.auth.auth import Auth
     auth = Auth()
 
 

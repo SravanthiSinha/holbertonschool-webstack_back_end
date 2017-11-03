@@ -4,6 +4,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os
 from models.user import User
+from models.user_session import UserSession
 from models.base_model import BaseModel, Base
 
 host = os.environ.get('HBNB_YELP_MYSQL_HOST')

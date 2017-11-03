@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""A class to manage the API authentication"""
+"""A class to manage the API authentication through Session"""
 from flask import Flask
 from flask import request
 from api.v1.auth.auth import Auth
