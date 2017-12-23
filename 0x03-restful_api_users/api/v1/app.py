@@ -6,12 +6,15 @@ from os import getenv
 from api.v1.views import app_views
 from models import db_session
 from flask import request
+from flask_cors import CORS
 
 env_port = getenv('HBNB_API_PORT')
 env_host = getenv('HBNB_API_HOST')
 env_auth = getenv('HBNB_YELP_AUTH')
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 app.register_blueprint(app_views)
 
 if env_auth == 'basic_auth':
