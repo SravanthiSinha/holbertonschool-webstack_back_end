@@ -3,18 +3,19 @@
 """
 
 from base_caching import BaseCaching
-from collections import OrderedDict
 
 
 class MRUCache(BaseCaching):
-    """MRU Caching technique with BaseCaching.MAX_ITEMS keys"""
-    recently_used = None
+    """MRU Caching technique which BaseCaching.MAX_ITEMS keys"""
+    MRU_data = None
+    index = None
 
     def __init__(self):
         """ Initiliaze
         """
         super().__init__()
-        self.cache_data = OrderedDict()
+        self.MRU_data = dict()
+        self.index = 0
 
     def put(self, key, item):
         """Add an item in the cache using MRU Caching technique and
@@ -27,13 +28,19 @@ class MRUCache(BaseCaching):
         """
         if key is not None and item is not None:
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                if self.recently_used in self.cache_data:
-                    del self.cache_data[self.recently_used]
-                print("DISCARD:", self.recently_used)
-            if key in self.cache_data:
-                del self.cache_data[key]
+                # print(self.MRU_data)
+                sorted_index = [
+                    (k,
+                     self.MRU_data[k]) for k in sorted(
+                        self.MRU_data,
+                        key=self.MRU_data.get,
+                        reverse=True)][0][0]
+                print("DISCARD:", sorted_index)
+                del self.cache_data[sorted_index]
+                del self.MRU_data[sorted_index]
             self.cache_data[key] = item
-            self.recently_used = key
+            self.MRU_data[key] = self.index
+            self.index += 1
 
     def get(self, key):
         """Get an item by key
@@ -42,6 +49,8 @@ class MRUCache(BaseCaching):
 
         """
         if key is not None:
-            self.recently_used = key
+            if key in self.MRU_data:
+                self.MRU_data[key] = self.index
+                self.index += 1
             return self.cache_data.get(key)
         return None
