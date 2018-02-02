@@ -3,7 +3,6 @@
 """
 
 from base_caching import BaseCaching
-from collections import OrderedDict
 
 
 class LRUCache(BaseCaching):
@@ -15,8 +14,7 @@ class LRUCache(BaseCaching):
         """ Initiliaze
         """
         super().__init__()
-        self.cache_data = OrderedDict()
-        self.lru_data = OrderedDict()
+        self.lru_data = dict()
         self.index = 0
 
     def put(self, key, item):
@@ -31,7 +29,6 @@ class LRUCache(BaseCaching):
         if key is not None and item is not None:
             if key in self.cache_data:
                 del self.cache_data[key]
-                del self.lru_data[key]
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 # print(self.lru_data)
                 sorted_index = [
@@ -44,7 +41,8 @@ class LRUCache(BaseCaching):
                 del self.cache_data[sorted_index]
                 del self.lru_data[sorted_index]
             self.cache_data[key] = item
-            self.lru_data[key] = 0
+            self.lru_data[key] = self.index
+            self.index += 1
 
     def get(self, key):
         """Get an item by key
@@ -53,8 +51,8 @@ class LRUCache(BaseCaching):
 
         """
         if key is not None:
-            for k in self.lru_data:
-                if k != key:
-                    self.lru_data[k] -= 1
+            if key in self.lru_data:
+                self.lru_data[key] = self.index
+                self.index += 1
             return self.cache_data.get(key)
         return None
