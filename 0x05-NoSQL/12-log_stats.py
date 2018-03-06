@@ -29,6 +29,6 @@ if __name__ == "__main__":
     print("{} logs".format(count_all(ngnix)))
     print("Methods:")
     for method in methods:
-        print("\t method {}: {}".format(method, count_method(ngnix, method)))
+        print("\tmethod {}: {}".format(method, count_method(ngnix, method)))
     print("{} status check".format(ngnix.count(
         {"method": "GET", "path": "/status"})))
