@@ -24,11 +24,11 @@ def count_method(mongo_collection, method):
 
 if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
-    ngnix = client.logs.ngnix
+    nginx = client.logs.nginx
     methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
-    print("{} logs".format(count_all(ngnix)))
+    print("{} logs".format(count_all(nginx)))
     print("Methods:")
     for method in methods:
-        print("\tmethod {}: {}".format(method, count_method(ngnix, method)))
-    print("{} status check".format(ngnix.count(
+        print("\tmethod {}: {}".format(method, count_method(nginx, method)))
+    print("{} status check".format(nginx.count(
         {"method": "GET", "path": "/status"})))
