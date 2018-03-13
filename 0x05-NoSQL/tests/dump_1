@@ -1,0 +1,4 @@
+// Test
+use logs 
+db.nginx.deleteMany({})
+db.nginx.insert({ path: "/status", ip: "172.31.2.14", method: "GET", date: "21/Feb/2018:03:51:02" })
